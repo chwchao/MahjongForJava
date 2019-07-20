@@ -10,7 +10,7 @@ public class Cli{
     public static void main(String[] args){
         try{
             //Creating client and connecting
-            Socket cli = new Socket("61.227.246.22", 1233);
+            Socket cli = new Socket("36.239.248.103", 1233);
 
             //Setup for window
             JFrame frame = new JFrame();
