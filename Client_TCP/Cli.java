@@ -30,7 +30,7 @@ public class Cli{
             tmp = in.readLine();
             out.writeUTF(tmp);
 
-            c1.close();
+            cli.close();
 
         }catch(IOException e){
             System.out.println("Error");
