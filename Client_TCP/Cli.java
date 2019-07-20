@@ -14,7 +14,7 @@ public class Cli{
 
             //Setup for window
             JFrame frame = new JFrame();
-            frame.setSize(1600, 1024);
+            frame.setSize(1024, 768);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
 
