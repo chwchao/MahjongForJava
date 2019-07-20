@@ -6,7 +6,7 @@ public class Ser{
         try{
 
             //Creating Server
-            ServerSocket server = new ServerSocket(1011);
+            ServerSocket server = new ServerSocket(1233);
             System.out.println("Server is created. Wating for connection...");
             Socket s1 = server.accept();
             System.out.println("Client is connected, IP: " + s1.getInetAddress());
