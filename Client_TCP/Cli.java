@@ -8,32 +8,65 @@ import javax.swing.JFrame;
 
 public class Cli{
     public static void main(String[] args){
+
+        //Declarations for connection
+        Socket cli = null;
+        BufferedReader local_input = null;      //Reader for local
+        DataInputStream in = null;         //Input from server
+        DataOutputStream out = null;     //Output to server
+
+        //Connecting to server
         try{
-            //Creating client and connecting
-            Socket cli = new Socket("36.239.248.103", 1233);
+            cli = new Socket("218.164.167.228", 1233);
+            in = new DataInputStream(cli.getInputStream());
+            out = new DataOutputStream(cli.getOutputStream());
+            System.out.println("Connected.");
+        } catch(IOException e){
+            System.out.println("ERROR: Connection to server problem");
+            e.printStackTrace();
+        }
 
-            //Setup for window
-            JFrame frame = new JFrame();
-            frame.setSize(1024, 768);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-
-            //Reader
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-
-            //Writer
-            DataOutputStream out = new DataOutputStream(cli.getOutputStream());
-
-            String tmp;
-
-            //Action of reading and writing through server
-            tmp = in.readLine();
-            out.writeUTF(tmp);
-
-            cli.close();
-
-        }catch(IOException e){
+        //Local input buliding
+        try{
+            local_input = new BufferedReader(new InputStreamReader(System.in));      //Reader for local
+        }catch(Exception e){
             System.out.println("Error");
         }
+
+        //Declarations for game
+        String[] hands;
+
+        //Action of reading and writing through server
+
+        hands = hands_recieve(in);
+
+        for(int i = 0; i < 16; i++)
+            System.out.println(hands[i]);
+
+        
+        //Setup for window
+        // JFrame frame = new JFrame();
+        // frame.setSize(1024, 768);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setVisible(true);
+
+        //Closing sockets
+        try{
+            cli.close();
+        } catch(IOException e){
+            System.out.println("ERROR: Closing socket problem");
+            e.printStackTrace();
+        }
+    }
+
+    public static String[] hands_recieve(DataInputStream in){
+        String tmp = "";
+        try{
+            tmp = in.readLine();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        
+        return tmp.split("\\s+");
     }
 }
