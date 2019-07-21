@@ -119,8 +119,8 @@ public class Ser{
     }
 
     public static void hands_send(Card[] player, DataOutputStream out){
-        String tmp = "";
-        for(int i = 0; i < 16; i++)
+        String tmp = player[0].str_generate() + " ";
+        for(int i = 1; i < 16; i++)
             tmp += (player[i].str_generate() + " ");
         
         try{
