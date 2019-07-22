@@ -63,7 +63,6 @@ public class Ser{
         Card[][] players = new Card[4][16];
 
         cards = shuffled_cards();
-        Collections.shuffle(cards);
 
 
         for(int i = 0; i < 16; i++){

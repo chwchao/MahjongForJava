@@ -62,10 +62,12 @@ public class Cli{
     public static String[] hands_recieve(DataInputStream in){
         String tmp = "";
         try{
-            tmp = in.readLine();
+            tmp = in.readUTF();
         } catch(IOException e){
             e.printStackTrace();
         }
+
+        System.out.println(tmp);
         
         return tmp.split("\\s+");
     }
