@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 //import java.awt.*;
 //import javax.swing.*;
@@ -40,8 +41,7 @@ public class Cli{
 
         hands = hands_recieve(in);
 
-        for(int i = 0; i < 17; i++)
-            System.out.println(hands[i]);
+        System.out.println(Arrays.asList(hands));
 
         
         //Setup for window

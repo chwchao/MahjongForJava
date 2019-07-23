@@ -53,29 +53,34 @@ public class Ser{
         
 
         //Initialization for game
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 4; i++){
             players[i] = new Player();
+            for(int j = 0; j < 17; j++)
+                players[i].hands[j] = new Card();
+        }
 
+        //Shuffle cards
         cards = shuffled_cards();
 
-
+        //Assign cards at start
         for(int i = 0; i < 4; i++)
             draw(players[i], 16);
 
         for(int j = 0; j < 4; j++){
             System.out.println("Player");
-            for(int i = 0; i < 16; i++)
-                System.out.println(players[0].hands[i].str_generate());
+            for(int i = 0; i < 17; i++)
+                System.out.print(players[j].hands[i].str_generate() + ", ");
         }
             
         for(int j = 0; j < 4; j++)
-            sortCards(players[0].hands);
+            sortCards(players[j].hands);
+
         handSend(players[0].hands, out[0]);
 
         for(int j = 0; j < 4; j++){
             System.out.println("Player");
-            for(int i = 0; i < 16; i++)
-                System.out.println(players[0].hands[i].str_generate());
+            for(int i = 0; i < 17; i++)
+                System.out.print(players[j].hands[i].str_generate() + ", ");
         }
 
         // //GAME
@@ -134,7 +139,7 @@ public class Ser{
             player.hands[16] = new Card(cards.get(next));
             next++;
         }
-        if(num == 16){
+        else if(num == 16){
             for(int i = 0; i < 16; i++){
                 player.hands[i] = new Card(cards.get(next));
                 next++;
