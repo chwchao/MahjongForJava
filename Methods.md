@@ -33,3 +33,29 @@
         return cards;
     }
     </pre></blockquote>
+
+<h3>換牌</h3>
+<blockquote><pre>
+    public static void swapCard(Card[] hands, int a, int b){
+        Card temp1 = new Card(hands[a]);
+        Card temp2 = new Card(hands[b]);
+        hands[a] = temp2;
+        hands[b] = temp1;
+        return;
+    }
+    </pre></blockquote>
+    
+<h3>換牌</h3>
+<blockquote><pre>
+    public static void handSend(Card[] player, DataOutputStream out){
+        String tmp = player[0].str_generate() + " ";
+        for(int i = 1; i < 16; i++)
+            tmp += (player[i].str_generate() + " ")
+        try{
+            out.writeUTF(tmp);
+        } catch(IOException e){
+            System.out.println("ERROR: Sending hands problem");
+            e.printStackTrace();
+        }
+    }
+    </pre></blockquote>
