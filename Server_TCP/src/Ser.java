@@ -5,6 +5,10 @@ import java.net.*;
 import java.util.*;
 
 public class Ser{
+
+    public static ArrayList<String> cards = new ArrayList<String>();      //Stack of cards
+    public static int next = 0;
+
     public static void main(String args[]){
 
         //Declarations for connection
@@ -45,8 +49,8 @@ public class Ser{
         
         
         //Declarations for game
-        ArrayList<String> cards = new ArrayList<String>();      //Stack of cards
         Player[] players = new Player[4];
+        
 
         //Initialization for game
         for(int i = 0; i < 4; i++)
@@ -55,15 +59,30 @@ public class Ser{
         cards = shuffled_cards();
 
 
-        for(int i = 0; i < 16; i++){
-            players[0].hands[i] = new Card(cards.get(i));
+        for(int i = 0; i < 4; i++)
+            draw(players[i], 16);
+
+        for(int j = 0; j < 4; j++){
+            System.out.println("Player");
+            for(int i = 0; i < 16; i++)
+                System.out.println(players[0].hands[i].str_generate());
+        }
+            
+        for(int j = 0; j < 4; j++)
+            sortCards(players[0].hands);
+        handSend(players[0].hands, out[0]);
+
+        for(int j = 0; j < 4; j++){
+            System.out.println("Player");
+            for(int i = 0; i < 16; i++)
+                System.out.println(players[0].hands[i].str_generate());
         }
 
-        for(int i = 0; i < 16; i++)
-            System.out.println(players[0].hands[i].str_generate());
+        // //GAME
+        // while(true){
+            
+        // }
 
-        sortCards(players[0].hands);
-        handSend(players[0].hands, out[0]);
 
         //Closing sockets
         try{
@@ -108,6 +127,22 @@ public class Ser{
         return cards;
     }
 
+    //Draw card(s)
+    public static void draw(Player player, int num){
+
+        if(num == 1){
+            player.hands[16] = new Card(cards.get(next));
+            next++;
+        }
+        if(num == 16){
+            for(int i = 0; i < 16; i++){
+                player.hands[i] = new Card(cards.get(next));
+                next++;
+            }      
+        }
+        return;
+    }
+
     //Sort cards in order
     public static void sortCards(Card[] hands){
 
@@ -130,7 +165,7 @@ public class Ser{
     //Send players' cards state to clients
     public static void handSend(Card[] player, DataOutputStream out){
         String tmp = player[0].str_generate() + " ";
-        for(int i = 1; i < 16; i++)
+        for(int i = 1; i < 17; i++)
             tmp += (player[i].str_generate() + " ");
         
         try{
@@ -140,5 +175,11 @@ public class Ser{
             e.printStackTrace();
         }
     }
+
+    // //Get card from stack
+    // public static void touch(){
+        
+    // }
+
 }
 

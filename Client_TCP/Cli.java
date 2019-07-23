@@ -40,7 +40,7 @@ public class Cli{
 
         hands = hands_recieve(in);
 
-        for(int i = 0; i < 16; i++)
+        for(int i = 0; i < 17; i++)
             System.out.println(hands[i]);
 
         
