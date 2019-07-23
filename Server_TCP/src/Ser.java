@@ -46,7 +46,11 @@ public class Ser{
         
         //Declarations for game
         ArrayList<String> cards = new ArrayList<String>();      //Stack of cards
-        Player players = new Player[4];
+        Player[] players = new Player[4];
+
+        //Initialization for game
+        for(int i = 0; i < 4; i++)
+            players[i] = new Player();
 
         cards = shuffled_cards();
 
@@ -58,8 +62,8 @@ public class Ser{
         for(int i = 0; i < 16; i++)
             System.out.println(players[0].hands[i].str_generate());
 
-        player[0].hands = sortedCards(player[0].hands);
-        handSend(player[0].hands, out[0]);
+        sortCards(players[0].hands);
+        handSend(players[0].hands, out[0]);
 
         //Closing sockets
         try{
@@ -105,7 +109,7 @@ public class Ser{
     }
 
     //Sort cards in order
-    public static void sortedCards(Card[] hands){
+    public static void sortCards(Card[] hands){
 
         for(int i = 0; i < 16; i++)
             for(int j = i; j < 16; j++){
