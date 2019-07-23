@@ -17,7 +17,7 @@ public class Cli{
 
         //Connecting to server
         try{
-            cli = new Socket("218.164.167.228", 1233);
+            cli = new Socket("36.238.86.180", 1233);
             in = new DataInputStream(cli.getInputStream());
             out = new DataOutputStream(cli.getOutputStream());
             System.out.println("Connected.");
@@ -68,7 +68,6 @@ public class Cli{
         }
 
         System.out.println(tmp);
-        
         return tmp.split("\\s+");
     }
 }

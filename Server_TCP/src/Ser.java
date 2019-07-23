@@ -60,7 +60,7 @@ public class Ser{
         
         //Declarations for game
         ArrayList<String> cards = new ArrayList<String>();      //Stack of cards
-        Card[][] players = new Card[4][16];
+        Card[][] players = new Card[4][17];
 
         cards = shuffled_cards();
 
@@ -72,6 +72,7 @@ public class Ser{
         for(int i = 0; i < 16; i++)
             System.out.println(players[0][i].str_generate());
 
+        sort_cards(player[0]);
         hands_send(players[0], out[0]);
 
         //Closing sockets
@@ -117,6 +118,11 @@ public class Ser{
         return cards;
     }
 
+    //Sort cards in order
+    public void sort_cards(Card[] hands){
+        hands.sort();
+    }
+
     public static void hands_send(Card[] player, DataOutputStream out){
         String tmp = player[0].str_generate() + " ";
         for(int i = 1; i < 16; i++)
@@ -128,7 +134,21 @@ public class Ser{
             System.out.println("ERROR: Sending hands problem");
             e.printStackTrace();
         }
-            
-        
     }
 }
+
+
+
+/*
+
+洗牌：ArrayList<String> shuffled_cards()
+
+理牌：
+
+傳送手牌至客戶端：void hands_send(Card[] player, DataOutputStream out)
+
+
+
+
+
+*/
