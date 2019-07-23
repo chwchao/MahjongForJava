@@ -42,38 +42,24 @@ public class Ser{
                 e.printStackTrace();
             }
         }
-
-        // try{
-        //     //Recieving data
-        //     in1 = new DataInputStream(s1.getInputStream());
-
-        //     String tmp = new String(din1.readUTF());
-        //     //System.out.println(tmp);
-
-            
-        // }catch(IOException e){
-        //     System.out.println("Error");
-        // }
-
-
         
         
         //Declarations for game
         ArrayList<String> cards = new ArrayList<String>();      //Stack of cards
-        Card[][] players = new Card[4][17];
+        Player players = new Player[4];
 
         cards = shuffled_cards();
 
 
         for(int i = 0; i < 16; i++){
-            players[0][i] = new Card(cards.get(i));
+            players[0].hands[i] = new Card(cards.get(i));
         }
 
         for(int i = 0; i < 16; i++)
-            System.out.println(players[0][i].str_generate());
+            System.out.println(players[0].hands[i].str_generate());
 
-        sortCards(players[0]);
-        handSend(players[0], out[0]);
+        player[0].hands = sortedCards(player[0].hands);
+        handSend(player[0].hands, out[0]);
 
         //Closing sockets
         try{
@@ -119,12 +105,13 @@ public class Ser{
     }
 
     //Sort cards in order
-    public static void sortCards(Card[] hands){
+    public static void sortedCards(Card[] hands){
 
-        //Bubble sort
-        for(int i = 0; i < 15; i++){
-            if(hands[i].sort > hands[i+1].sort) swapCard(hands, i, i+1);
-        }
+        for(int i = 0; i < 16; i++)
+            for(int j = i; j < 16; j++){
+                if(hands[i].sort > hands[j].sort) swapCard(hands, i, j);
+                else if(hands[i].sort == hands[j].sort && hands[i].val > hands[j].val) swapCard(hands, i, j);
+            }
     }
 
     //Swap two card
@@ -136,6 +123,7 @@ public class Ser{
         return;
     }
 
+    //Send players' cards state to clients
     public static void handSend(Card[] player, DataOutputStream out){
         String tmp = player[0].str_generate() + " ";
         for(int i = 1; i < 16; i++)
@@ -150,17 +138,3 @@ public class Ser{
     }
 }
 
-
-
-/*
-
-ArrayList<String> shuffled_cards()
-
-
-void hands_send(Card[] player, DataOutputStream out)
-
-
-
-
-
-*/
