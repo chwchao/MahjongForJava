@@ -72,8 +72,9 @@ public class Ser{
         for(int i = 0; i < 16; i++)
             System.out.println(players[0][i].str_generate());
 
-        sort_cards(player[0]);
-        hands_send(players[0], out[0]);
+        swapCard(players[0][0], players[0][1]);
+
+        handSend(players[0], out[0]);
 
         //Closing sockets
         try{
@@ -118,12 +119,24 @@ public class Ser{
         return cards;
     }
 
-    //Sort cards in order
-    public void sort_cards(Card[] hands){
-        hands.sort();
+    // //Sort cards in order
+    // public void sortCards(Card[] hands){
+
+    //     //Bubble sort
+    //     for(int i = 0; i < 15; i++){
+    //         if()
+    //     }
+    // }
+
+    //Swap two card
+    public static void swapCard(Card a, Card b){
+        Card temp = a;
+        a = b;
+        b = temp;
+        return;
     }
 
-    public static void hands_send(Card[] player, DataOutputStream out){
+    public static void handSend(Card[] player, DataOutputStream out){
         String tmp = player[0].str_generate() + " ";
         for(int i = 1; i < 16; i++)
             tmp += (player[i].str_generate() + " ");
@@ -141,11 +154,10 @@ public class Ser{
 
 /*
 
-洗牌：ArrayList<String> shuffled_cards()
+ArrayList<String> shuffled_cards()
 
-理牌：
 
-傳送手牌至客戶端：void hands_send(Card[] player, DataOutputStream out)
+void hands_send(Card[] player, DataOutputStream out)
 
 
 
