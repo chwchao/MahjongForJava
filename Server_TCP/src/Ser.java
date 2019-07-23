@@ -72,7 +72,7 @@ public class Ser{
         for(int i = 0; i < 16; i++)
             System.out.println(players[0][i].str_generate());
 
-        swapCard(players[0], 0, 1);
+        sortCards(players[0]);
         handSend(players[0], out[0]);
 
         //Closing sockets
@@ -118,14 +118,14 @@ public class Ser{
         return cards;
     }
 
-    // //Sort cards in order
-    // public void sortCards(Card[] hands){
+    //Sort cards in order
+    public static void sortCards(Card[] hands){
 
-    //     //Bubble sort
-    //     for(int i = 0; i < 15; i++){
-    //         if()
-    //     }
-    // }
+        //Bubble sort
+        for(int i = 0; i < 15; i++){
+            if(hands[i].sort > hands[i+1].sort) swapCard(hands, i, i+1);
+        }
+    }
 
     //Swap two card
     public static void swapCard(Card[] hands, int a, int b){
