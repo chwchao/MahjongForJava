@@ -66,8 +66,6 @@ public class Cli{
         } catch(IOException e){
             e.printStackTrace();
         }
-
-        System.out.println(tmp);
         return tmp.split("\\s+");
     }
 }

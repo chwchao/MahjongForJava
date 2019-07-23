@@ -72,8 +72,7 @@ public class Ser{
         for(int i = 0; i < 16; i++)
             System.out.println(players[0][i].str_generate());
 
-        swapCard(players[0][0], players[0][1]);
-
+        swapCard(players[0], 0, 1);
         handSend(players[0], out[0]);
 
         //Closing sockets
@@ -129,10 +128,11 @@ public class Ser{
     // }
 
     //Swap two card
-    public static void swapCard(Card a, Card b){
-        Card temp = a;
-        a = b;
-        b = temp;
+    public static void swapCard(Card[] hands, int a, int b){
+        Card temp1 = new Card(hands[a]);
+        Card temp2 = new Card(hands[b]);
+        hands[a] = temp2;
+        hands[b] = temp1;
         return;
     }
 

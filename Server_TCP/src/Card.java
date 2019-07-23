@@ -7,6 +7,11 @@ public class Card{
 
     public Card(){}
 
+    public Card(Card card){
+        this.sort = card.sort;
+        this.val = card.val;
+    }
+
     public Card(String card){
         sort = card.charAt(0);
         val = card.charAt(1);
