@@ -1,5 +1,6 @@
 <h3>洗牌&發牌</h3>
-＜blockquote＞//Create a shuffled stack of cards for a new game.
+<blockquote>
+    //Create a shuffled stack of cards for a new game.
     public static ArrayList<String> shuffled_cards(){
         ArrayList<String> cards = new ArrayList<String>(
             //Default cards for a game
@@ -30,4 +31,5 @@
         );
         Collections.shuffle(cards);
         return cards;
-    }＜/blockquote＞
+    }
+    </blockquote>
