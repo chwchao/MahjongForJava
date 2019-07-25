@@ -34,7 +34,7 @@ public class Cli{
 
         //Connecting to server
         try{
-            cli = new Socket("218.164.171.48", 1233);
+            cli = new Socket("106.1.56.230", 1233);
             in = new DataInputStream(cli.getInputStream());
             out = new DataOutputStream(cli.getOutputStream());
             System.out.println("Connected.");
@@ -115,9 +115,12 @@ public class Cli{
 
                     //Send cmd
                     //no movement
-                    if(!win && !pong && !kong && !chow[0] && !chow[1] && !chow[2]);
+                    if(!win || !pong || !kong || !chow[0] || !chow[1] || !chow[2]){
+                        out.writeChar('N');
+                    }
                     else{
-                        out.writeChar(discard.nextLine().charAt(0));
+                        char temp_char = discard.next().charAt(0);
+                        out.writeChar(temp_char);
                     }
                     win = false;
                     kong = false;

@@ -101,6 +101,7 @@ public class Ser{
 
                 //"TURN": Someone has to discard a card 
                 if(state == 'T'){
+                    System.out.println("T");
                     who_pong = -1;
                     who_kong = -1;
 
@@ -109,7 +110,7 @@ public class Ser{
                     handSend(players[turn].hands, out[turn]);   //send to client
 
                     //Just print out
-                    for(int j = 0; j < 4; j++){
+                    for(int j = 0; j < player_num; j++){
                         System.out.print("Player");
                         for(int i = 0; i < 17; i++)
                             System.out.print(players[j].hands[i].str_generate() + ", ");
@@ -125,6 +126,7 @@ public class Ser{
 
                 //"CHECK": Check after someone discard one (win -> kong/pong -> chow)
                 else if(state == 'C'){
+                    System.out.println("C");
 
                     /*Check win first*/
 
@@ -162,7 +164,7 @@ public class Ser{
                         //chow
                         if(temp_turn == turn + 1 || temp_turn == turn + 1 - player_num){
                             out[temp_turn].writeChar('c');
-                            for(int j = 0; j < player_num - 1; j++){
+                            for(int j = 0; j < 3; j++){
                                 if(result[j])
                                     out[temp_turn].writeChar('y');
                                 else
@@ -192,6 +194,7 @@ public class Ser{
                 }
 
                 else if(state == 'O'){
+                    System.out.println("O");
                     boolean operation = false;
                     int temp_turn = turn;
                     char temp_cmd = 'n';
@@ -211,7 +214,6 @@ public class Ser{
                         //Send card
                         out[temp_turn].writeUTF(pool.get(pool.size() - 1));
 
-                        out[temp_turn].writeChar('C');
 
                         //No movement
                         temp_cmd = in[temp_turn].readChar();
@@ -219,31 +221,37 @@ public class Ser{
                         else if(temp_cmd == '1'){
                             chow(temp_turn, temp_cmd);
                             operation = true;
+                            System.out.println("Messenge recieve");
                             break;
                         }
                         else if(temp_cmd == '2'){
                             chow(temp_turn, temp_cmd);
                             operation = true;
+                            System.out.println("Messenge recieve");
                             break;
                         }
                         else if(temp_cmd == '3'){
                             chow(temp_turn, temp_cmd);
                             operation = true;
+                            System.out.println("Messenge recieve");
                             break;
                         }
                         else if(temp_cmd == 'P'){
                             pong(temp_turn);
                             operation = true;
+                            System.out.println("Messenge recieve");
                             break;
                         }
                         else if(temp_cmd == 'K'){
                             kong(temp_turn);
                             operation = true;
+                            System.out.println("Messenge recieve");
                             break;
                         }
                         else if(temp_cmd == 'W'){
                             //WIN
                             operation = true;
+                            System.out.println("Messenge recieve");
                             break;
                         }
                     }
@@ -257,6 +265,7 @@ public class Ser{
                     }
                     if(turn == player_num) turn = 0;
                     state = 'T';
+                    System.out.println("Messenge recieve");
                     continue;
                 }
 
