@@ -4,7 +4,6 @@ public class Card{
     
     char sort = 'n';
     char val = 'n';
-    boolean used = false;
 
     public Card(){}
 
