@@ -1,30 +1,52 @@
-package ser;
+package server;
 
 public class Card{
     
-    char sort = 'n';
-    char val = 'n';
+    private char sort;
+    private char val;
 
-    public Card(){}
+    /* Construct */
 
+    // by default (default 'nn' -> none)
+    public Card(){
+        this.sort = 'n';
+        this.sort = 'n';
+    }
+
+    // with a Card class
     public Card(Card card){
         this.sort = card.sort;
         this.val = card.val;
     }
 
+    // with a String ( 'sort' + 'val' )
     public Card(String card){
         sort = card.charAt(0);
         val = card.charAt(1);
     }
 
-    public void set_card(String card){
-        System.out.println(card);
+
+    /* Methods */
+
+    // Set card
+    public void setCard(String card){
         sort = card.charAt(0);
         val = card.charAt(1);
     }
 
-    public String str_generate(){
+    // Get card
+    public String getCard(){
         return String.valueOf(sort) + String.valueOf(val);
+    }
+
+    // Get sort
+    public char getSort(){
+        return this.sort;
+    }
+
+    // Get val
+    public char getVal(){
+        return this.val;
     }
 
 }
