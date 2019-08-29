@@ -453,8 +453,8 @@ public class Server{
 	try{
             for (int i = 0; i < clientNum; i++) {
                 out[i].writeChar(SEND); // Start sending
-                for (int j = 0; i < clientNum; i++) {
-		    out[i].writeInt(i + 1); // Tell which player's
+                for (int j = 0; j < clientNum; j++) {
+		    out[i].writeInt(j + 1); // Tell which player's
                     out[i].writeUTF(players[j].getHand()); // Send hand
                     out[i].writeUTF(players[j].getConsume()); // Send consume
                 }
