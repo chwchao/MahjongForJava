@@ -98,7 +98,7 @@ public class Player{
 
     // Has flower ( remove flower ), true if has-flower, false if not
     public boolean hasFlower() {
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 17; i++)
             if (hands[i].getSort() == 'F') {
                 consume.add(hands[i].getCard());
                 hands[i].setCard("nn");

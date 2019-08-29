@@ -104,21 +104,6 @@ public class Server{
             }
         }
 
-
-        //Initialization for game
-
-        // for(int i = 0; i < clientNum; i++)
-        //     handSend(players[i].hands, out[i]);
-
-        // for(int j = 0; j < clientNum; j++){
-        //     System.out.print("Player");
-        //     for(int i = 0; i < 17; i++)
-        //         System.out.print(players[j].hands[i].str_generate() + ", ");
-        //     System.out.println("");
-        //     System.out.println(players[j].consume);
-        // }
-        // System.out.println(pool);
-        
         try{
             while(true){
 
@@ -135,9 +120,9 @@ public class Server{
                 // A player draws
                 else if(state == DRAW_CARD){
                     draw(turn);
-                    handSend();
                     flowerOff(turn);
                     handSend();
+		    poolSend();
                     state = CHECK_BEFORE_DISCARD;
                 }
 
@@ -159,6 +144,8 @@ public class Server{
                             case KONG:
                                 kong(turn);
                                 draw(turn);
+				handSend();
+				poolSend();
                                 state = DISCARD;
                                 break;
                             default:
@@ -170,6 +157,8 @@ public class Server{
 
                 else if(state == DISCARD){
                     discard(turn);
+		    handSend();
+		    poolSend();
                     nextTurn();
                     state = CHECK_ALL;
                 }
@@ -201,10 +190,14 @@ public class Server{
                                         break;
                                     case KONG:
                                         kong(tempTurn);
+					handSend();
+		    			poolSend();
                                         state = DRAW_CARD;
                                         break;
                                     case PONG:
                                         pong(tempTurn);
+					handSend();
+		    			poolSend();
                                         state = DISCARD;
                                         break;
                                     default:
@@ -222,10 +215,14 @@ public class Server{
                                         break;
                                     case KONG:
                                         kong(tempTurn);
+					handSend();
+		    			poolSend();
                                         state = DRAW_CARD;
                                         break;
                                     case PONG:
                                         pong(tempTurn);
+					handSend();
+		    			poolSend();
                                         state = DISCARD;
                                         break;
                                     case CHOW_REAR:
@@ -234,10 +231,14 @@ public class Server{
                                         break;
                                     case CHOW_MID:
                                         chow(tempTurn, 2);
+					handSend();
+		    			poolSend();
                                         state = DISCARD;
                                         break;
                                     case CHOW_FRONT:
                                         chow(tempTurn, 1);
+					handSend();
+		    			poolSend();
                                         state = DISCARD;
                                         break;
                                     default:
@@ -265,22 +266,32 @@ public class Server{
                                 break;
                             case KONG:
                                 kong(turn);
+				handSend();
+		    		poolSend();
                                 state = DRAW_CARD;
                                 break;
                             case PONG:
                                 pong(turn);
+				handSend();
+		    		poolSend();
                                 state = DISCARD;
                                 break;
                             case CHOW_REAR:
                                 chow(turn, 3);
+				handSend();
+		    		poolSend();
                                 state = DISCARD;
                                 break;
                             case CHOW_MID:
                                 chow(turn, 2);
+				handSend();
+		    		poolSend();
                                 state = DISCARD;
                                 break;
                             case CHOW_FRONT:
                                 chow(turn, 1);
+				handSend();
+		    		poolSend();
                                 state = DISCARD;
                                 break;
                             default:
@@ -288,7 +299,6 @@ public class Server{
                             }
                         }
                     }
-
                     state = DRAW_CARD;
                 }
                 // Win and end
@@ -329,8 +339,7 @@ public class Server{
         handSend();
 
         // Sort cards
-        for(int i = 0; i < clientNum; i++)  players[i].sortCards(); 
-        handSend();
+        for(int i = 0; i < clientNum; i++)  players[i].sortCards();
 
         // Flower off
         for(int i = 0; i < clientNum; i++)  flowerOff(i);
@@ -356,7 +365,6 @@ public class Server{
         while (players[player].hasFlower()) {
             draw(player);
         }
-        players[player].sortCards();
     }
 
     //Pong
