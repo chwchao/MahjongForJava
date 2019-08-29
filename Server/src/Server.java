@@ -386,7 +386,7 @@ public class Server{
 
     //Chow
     public  static void chow(int player, int set){
-        players[player].chow(board.getLatest(), set);
+        players[player].chow(board.poolUsed(), set);
         turn = player;
     }
 

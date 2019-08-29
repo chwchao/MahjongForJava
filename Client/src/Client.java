@@ -129,7 +129,7 @@ public class Client{
             // Print out players' imformation
             if(tmpPlayer == number){
                 System.out.println("***YOU***");
-                System.out.printf("hands:\t   %s\n", tmpHand);
+                System.out.printf("hands:\t  %s\n", tmpHand);
                 System.out.printf("consumes: %s", tmpConsume);
                 System.out.println("");
             }
