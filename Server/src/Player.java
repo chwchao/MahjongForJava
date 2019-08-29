@@ -89,7 +89,7 @@ public class Player{
         // Judge if combinations work
         if (near[0] && near[1]) result[0] = true;
         if (near[1] && near[2]) result[1] = true;
-        if (near[3] && near[4]) result[2] = true;
+        if (near[2] && near[3]) result[2] = true;
         return result;
     }
     

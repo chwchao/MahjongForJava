@@ -135,11 +135,13 @@ public class Client{
             }
             else{
                 System.out.printf("Player %d\n", tmpPlayer);
+		System.out.print("hands: ");
                 for(int j = 0; j < tmpHand.length(); j++){
                     if(tmpHand.charAt(j) == ' ') System.out.print(" ");
                     else System.out.print("*");
                 }
                 System.out.println("");
+		System.out.print("consumes: ");
                 for(int j = 0; j < tmpConsume.length(); j++){
                     if(tmpConsume.charAt(j) == ' ') System.out.print(" ");
                     else System.out.print("*");
