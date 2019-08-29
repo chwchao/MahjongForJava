@@ -1,8 +1,6 @@
-package server;
+package app;
 
 import java.util.*;
-
-import sun.security.util.Length;
 
 public class Player{
 
@@ -102,10 +100,10 @@ public class Player{
     public boolean hasFlower() {
         for (int i = 0; i < 16; i++)
             if (hands[i].getSort() == 'F') {
-                consume.add(hands[i].getCard);
-                hands[n].setCard("nn");
+                consume.add(hands[i].getCard());
+                hands[i].setCard("nn");
+		swapCard(i, 16);
                 return true;
-                swapCard(i, 16);
             }
         return false;
     }
@@ -126,7 +124,7 @@ public class Player{
     }
 
     // Pong
-    public void Pong(String card){
+    public void pong(String card){
         int count = 0;
         for (int i = 0; i < 16; i++) {
             if (this.hands[i].getCard().equals(card)){
@@ -141,7 +139,7 @@ public class Player{
     }
 
     //Kong
-    public void Kong(String card){
+    public void kong(String card){
         int count = 0;
         if(card.equals("nn")){
             count = -1;
@@ -153,7 +151,7 @@ public class Player{
 
         for (int i = 0; i < 16; i++) {
             if (this.hands[i].getCard().equals(card)) {
-                this.consume.add(this.hands[i]);
+                this.consume.add(this.hands[i].getCard());
                 this.hands[i] = new Card("nn");
                 count++;
             }
@@ -222,7 +220,7 @@ public class Player{
         String hand = "";
         for (int i = 0; i < 17; i++) {
             hand += this.hands[i].getCard();
-            hands += " ";
+            hand += " ";
         }
         return hand;
     }
@@ -230,7 +228,7 @@ public class Player{
     // Get String of consumes
     public String getConsume() {
         String consume = "";
-        for (int i = 0; i < this.consume.Length(); i++) {
+        for (int i = 0; i < this.consume.size(); i++) {
             consume += this.consume.get(i);
             consume += " ";
         }

@@ -1,14 +1,8 @@
-package server;
+package app;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
-
-import javax.lang.model.util.ElementScanner6;
-
-import com.sun.tools.sjavac.CleanProperties;
-
-import jdk.tools.jlink.internal.Platform;
 
 public class Server{
 
@@ -429,7 +423,7 @@ public class Server{
         }
 
         // Check Chow
-        int[] result_chow = players[player].checkChow(card);
+        boolean[] result_chow = players[player].checkChow(card);
         result[5] = result_chow[2];
         result[6] = result_chow[1];
         result[7] = result_chow[0];
@@ -444,44 +438,64 @@ public class Server{
 
     // Discard
     public static void discard(int player) {
-
-        out[player].writeChar(DISCARD); // Start sending
-        int n = Integer.valueOf(in[player].readUTF()); // Get number
+	int n = 0;
+	try{
+            out[player].writeChar(DISCARD); // Start sending
+            n = Integer.valueOf(in[player].readUTF()); // Get number
+	} catch(IOException e){
+            e.printStackTrace();
+        }
         board.cardDiscarded(players[player].discard(n)); // Discard
     }
 
     // Send players' cards state to clients (int * 1 + String * 2)
     public static void handSend() {
-
-        for (int i = 0; i < clientNum; i++) {
-            out[i].writeChar(SEND); // Start sending
-            out[i].writeInt(i + 1); // Tell which player's
-            for (int j = 0; i < clientNum; i++) {
-                out[i].writeUTF(players[j].getHand()); // Send hand
-                out[i].writeUTF(players[j].getConsume()); // Send consume
+	try{
+            for (int i = 0; i < clientNum; i++) {
+                out[i].writeChar(SEND); // Start sending
+                out[i].writeInt(i + 1); // Tell which player's
+                for (int j = 0; i < clientNum; i++) {
+                    out[i].writeUTF(players[j].getHand()); // Send hand
+                    out[i].writeUTF(players[j].getConsume()); // Send consume
+                }
             }
+	} catch(IOException e){
+            e.printStackTrace();
         }
-        Thread.sleep(1000);
+	try{
+            Thread.sleep(1000);
+        } catch(InterruptedException e){
+	    e.printStackTrace();
+	}
     }
 
     // Send pool
     public static void poolSend(){
         String temp = board.getPool();          // Get pool info
-        for(int i = 0; i < clientNum; i++){
-            out[i].writeChar(POOL);             // Start sending
-            out[i].writeUTF(temp);
+	try{
+            for(int i = 0; i < clientNum; i++){
+                out[i].writeChar(POOL);             // Start sending
+                out[i].writeUTF(temp);
+            }
+	} catch(IOException e){
+            e.printStackTrace();
         }
     }
 
     // Send opts, and get chosen one back
     public static char getOpt(int player, boolean[] opts) {
-
-        out[player].writeChar(OPT);             // Start sending
-        for (int i = 1; i <= 7; i++) {          // Send options
-            if (opts[i]) out[player].writeChar('Y');
-            else out[player].writeChar('N');
+	char opt = ' ';
+	try{
+            out[player].writeChar(OPT);             // Start sending
+            for (int i = 1; i <= 7; i++) {          // Send options
+                if (opts[i]) out[player].writeChar('Y');
+                else out[player].writeChar('N');
+            }
+            opt = in[player].readChar();           // Get option
+	} catch(IOException e){
+            e.printStackTrace();
         }
-        return in[player].readChar();           // Get option
+	return opt;
     }
 }
 

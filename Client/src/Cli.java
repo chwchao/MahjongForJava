@@ -1,3 +1,5 @@
+package app;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -45,7 +47,7 @@ public class Cli{
 
         //Connecting to server
         try{
-            cli = new Socket("106.1.56.230", 1233);
+            cli = new Socket("218.164.163.49", 1233);
             in = new DataInputStream(cli.getInputStream());
             out = new DataOutputStream(cli.getOutputStream());
             System.out.println("Connected.");
