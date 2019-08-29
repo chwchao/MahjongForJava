@@ -86,6 +86,7 @@ public class Board{
 
     // Get the latest card that is discarded
     public String getLatest(){
+	if(pool.size() == 0) return "nn";
         return pool.get(pool.size() - 1);
     }
 
