@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class Cli{
+public class Client{
 
     private static final int clientNum = 2;
 
@@ -129,12 +129,12 @@ public class Cli{
             // Print out players' imformation
             if(tmpPlayer == number){
                 System.out.println("***YOU***");
-                System.out.printf("hands:\t%s", tmpHand);
+                System.out.printf("hands:\t%s\n", tmpHand);
                 System.out.printf("consumes:\t%s", tmpConsume);
                 System.out.println("");
             }
             else{
-                System.out.printf("Player %d\n");
+                System.out.printf("Player %d\n", tmpPlayer);
                 for(int j = 0; j < tmpHand.length(); j++){
                     if(tmpHand.charAt(j) == ' ') System.out.print(" ");
                     else System.out.print("*");

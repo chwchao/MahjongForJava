@@ -2,4 +2,4 @@
 
 set -x
 
-javac -d . ./src/Cli.java
+javac -d . ./src/Client.java
