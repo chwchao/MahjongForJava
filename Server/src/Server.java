@@ -299,7 +299,7 @@ public class Server{
                             }
                         }
                     }
-                    state = DRAW_CARD;
+		    if(state == CHECK_ALL) state = DRAW_CARD;
                 }
                 // Win and end
                 else if(state == WIN_END){
@@ -338,11 +338,12 @@ public class Server{
             players[i].dealedCard(board.cardDeal());
         handSend();
 
+	// Flower off
+        for(int i = 0; i < clientNum; i++)  flowerOff(i);
+
         // Sort cards
         for(int i = 0; i < clientNum; i++)  players[i].sortCards();
 
-        // Flower off
-        for(int i = 0; i < clientNum; i++)  flowerOff(i);
         handSend();
     }
 
@@ -363,6 +364,7 @@ public class Server{
     // Take out flower
     public static void flowerOff(int player) {
         while (players[player].hasFlower()) {
+	    players[player].sortCards();
             draw(player);
         }
     }
@@ -426,7 +428,7 @@ public class Server{
             result[4] = true;
             result[0] = false; // won't skip
         } else if (temp == 1) {
-            result[4] = false;
+            result[4] = true;
             result[0] = false;
         }
 

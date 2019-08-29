@@ -31,8 +31,8 @@ public class Player{
     // Sort hands in order
     public void sortCards(){
         // Bubble sort (put the smallest to front)
-        for(int i = 0; i < 16; i++)
-            for(int j = i; j < 16; j++){
+        for(int i = 0; i < 17; i++)
+            for(int j = i; j < 17; j++){
                 // sort first
                 if(this.hands[i].getSort() > this.hands[j].getSort()) 
                     swapCard(i, j);
@@ -80,10 +80,10 @@ public class Player{
         for (int i = 0; i < 4; i++) near[i] = false;
         for (int i = 0; i < 16; i++)
             if (this.hands[i].getSort() == sort) {
-                if (value == this.hands[i].getVal() - 2) near[0] = true;
-                else if (value == this.hands[i].getVal() - 1) near[1] = true;
-                else if (value == this.hands[i].getVal() + 1) near[2] = true;
-                else if (value == this.hands[i].getVal() + 2) near[3] = true;
+                if (value == this.hands[i].getVal() + 2) near[0] = true;
+                else if (value == this.hands[i].getVal() + 1) near[1] = true;
+                else if (value == this.hands[i].getVal() - 1) near[2] = true;
+                else if (value == this.hands[i].getVal() - 2) near[3] = true;
             }
 
         // Judge if combinations work
@@ -102,7 +102,6 @@ public class Player{
             if (hands[i].getSort() == 'F') {
                 consume.add(hands[i].getCard());
                 hands[i].setCard("nn");
-		swapCard(i, 16);
                 return true;
             }
         return false;
@@ -125,6 +124,7 @@ public class Player{
 
     // Pong
     public void pong(String card){
+ 	this.consume.add(card);
         int count = 0;
         for (int i = 0; i < 16; i++) {
             if (this.hands[i].getCard().equals(card)){
@@ -194,7 +194,7 @@ public class Player{
                 }
             }
         } 
-        else if(set == '3') {
+        else if(set == 3) {
             for (int i = 0; i < 16; i++) {
                 if(this.hands[i].getSort() == card.charAt(0) && this.hands[i].getVal() == card.charAt(1) + 1 && !first) {
                     this.consume.add(this.hands[i].getCard());

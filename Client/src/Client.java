@@ -113,7 +113,7 @@ public class Client{
 
     // Recieve players' imformation and print it out ( Show all players' cards )
     public static void handRecieve(){
-        System.out.println("\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         for(int i = 0; i < clientNum; i++){
             int tmpPlayer = 0;
             String tmpHand = "";
@@ -129,8 +129,8 @@ public class Client{
             // Print out players' imformation
             if(tmpPlayer == number){
                 System.out.println("***YOU***");
-                System.out.printf("hands:\t%s\n", tmpHand);
-                System.out.printf("consumes:\t%s", tmpConsume);
+                System.out.printf("hands:\t   %s\n", tmpHand);
+                System.out.printf("consumes: %s", tmpConsume);
                 System.out.println("");
             }
             else{
@@ -142,10 +142,7 @@ public class Client{
                 }
                 System.out.println("");
 		System.out.print("consumes: ");
-                for(int j = 0; j < tmpConsume.length(); j++){
-                    if(tmpConsume.charAt(j) == ' ') System.out.print(" ");
-                    else System.out.print("*");
-                }
+                System.out.print(tmpConsume);
                 System.out.println("");
             }
         }
